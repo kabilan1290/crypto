@@ -1,5 +1,5 @@
 #!/usr/bin/python
-# loopbase64
+# loopbase64 solver
 import sys
 
 args = sys.argv[1]
@@ -17,7 +17,7 @@ try:
 		#	break
 		
 		else:
-			print(args)
+			print("The end")
 			break
 
 except:
