@@ -71,4 +71,11 @@ e = 6348662706560873  =  101
     	print(chr(i))
 	    print("\n")
     ```
+- By matching them manually i was able to get the flag.(we can also write script to enumerate flag)
+
+## Flag:
+
+ nite{jU5t_b45Ic_MaTH}
+
+
 
