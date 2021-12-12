@@ -26,6 +26,7 @@ print(enc)
 - In the equation the character value of each letter is converter into ascii form ==> n = 110
 - The value is passed down to the expression (a*pow(ord(x),3)+b*pow(ord(x),2)+c*ord(x)+d) ==> (a*pow(110,3)+b*pow(110,2)+c*110+d)
 - We can clearly see this is an cubic equation ax^3 + bx^2 + cx + d = 0 
+- Finding a,b,c,d is not possible.
 
 ## Encrypted values:
 
@@ -46,7 +47,7 @@ e = 6348662706560873  =  101
 
 - We can assume the encrypted value for n =  *8194393930139798* should be derived from the expression (a*pow(110,3)+b*pow(110,2)+c*110+d) or ax^3+bx^2+cx+d where x =110
 - For the second encrypted value i = *7130326565974613* should be derived from the expression  (a*pow(105,3)+b*pow(105,2)+c*105+d) or ax^3+bx^2+cx+d where x =105 and so on for the next characters.
-- Initial thought process is  divide the encrypted value with known values x^3+x^2+x accordingly and notice the result.
+- Initial thought process is to divide the encrypted value with known values x^3+x^2+x accordingly and notice the result.
 - encrypted value of n / x^3+x^2+x  where x is 110 ,encrypted value of i / x^3+x^2+x  where x is 105 and so on for the next 2 characters t,e
 
      <center><img src="none/powerless.jpg" width="400" height="300" /></center>
