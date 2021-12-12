@@ -54,8 +54,7 @@ e = 6348662706560873  =  101
 - I took the resultant value of n and named it powerless = 6100605214
 - My approach is to substitue standard ascii characters 0-127 in x^3+x^2+x and multiply with powerless,By doing so i can compare these values to encrypted values and map them to characters
 
-     <center><img src="none/matcher.jpg" width="600" height="300" /></center>
-     
+
      ```
      I created the below script to generate the corresponding values and matched them manually.
      
@@ -71,6 +70,10 @@ e = 6348662706560873  =  101
     	print(chr(i))
 	    print("\n")
     ```
+    
+     <center><img src="none/matcher.jpg" width="600" height="300" /></center>
+     
+
 - By matching them manually i was able to get the flag.(we can also write script to enumerate flag)
 
 ## Flag:
