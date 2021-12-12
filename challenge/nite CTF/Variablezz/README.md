@@ -55,4 +55,20 @@ e = 6348662706560873  =  101
 - My approach is to substitue standard ascii characters 0-127 in x^3+x^2+x and multiply with powerless,By doing so i can compare these values to encrypted values and map them to characters
 
      <center><img src="none/matcher.jpg" width="600" height="300" /></center>
+     
+     ```
+     I created the below script to generate the corresponding values and matched them manually.
+     
+     powerless = 6100605214
+
+    for i in range (0,127):
+	    finder = i + pow(i,2) + pow(i,3)
+	    encval = powerless * finder
+	    encval = str(encval)
+
+	    print("answer:"+encval)
+	    print(i)
+    	print(chr(i))
+	    print("\n")
+    ```
 
