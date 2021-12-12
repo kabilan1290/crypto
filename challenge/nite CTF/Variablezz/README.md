@@ -1,1 +1,1 @@
-<img src="none/variables.png" width="900" height="900" />
+<img src="none/variables.png" width="400" height="450" />
