@@ -48,4 +48,4 @@ e = 6348662706560873  =  101
 - For the second encrypted value i = *7130326565974613* should be derived from the expression  (a*pow(105,3)+b*pow(105,2)+c*105+d) or ax^3+bx^2+cx+d where x =105 and so on for the next characters.
 - Initial thought process is  divide the encrypted value with known values x^3+x^2+x accordingly and notice the result.
 
-<center><img src="none/powerless.jpg" width="400" height="300" /></center>
+     <center><img src="none/powerless.jpg" width="400" height="300" /></center>
