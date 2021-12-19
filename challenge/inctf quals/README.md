@@ -1,6 +1,10 @@
 ## Challenge Name : Duplicates
 
-<p align="center"><img src="images/duplicates.png" width="700" height="400" /></p>
+DESCRIPTION:
+Is it possible to duplicate?
+
+FLAG FORMAT:
+inctf{...}
 
 #### Challenge file:
 
@@ -72,7 +76,13 @@ d2 = inverse(e,gmpy2.lcm(p-1,q-1))
    inctf{Seems_l1k3_LCM_1s_n0t_Us3less}
    
 ## Challenge Name : common-extender
-   
+
+DESCRIPTION
+Break the box to get the flag
+
+FLAG FORMAT:
+inctf{...} 
+
 Challenge file:
 ```
 from Crypto.Util.number import *
@@ -102,6 +112,7 @@ n=111559697369750303216038416725252952275707162105955906994536140582379814264693
 - Above were the given chall.py and its output.
 - Based on initial observation we can see the values `c1,c2,e1,e2,n` > Here the flag `m` is being encrypted into two ciphertexts `c1 and c2` with two different exponents `e1 and e2` by using same modulus.
 - Hence this method is vulnerable to common modulus attack ==> https://infosecwriteups.com/rsa-attacks-common-modulus-7bdb34f331a5
+- We are going to do the math explained in the above writeup.
 - if gcd(e1,e2) = 1 then the integers s1 and s2 is `s1e1+s2e2 =1`
 
 ```
