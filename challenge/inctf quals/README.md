@@ -2,7 +2,7 @@
 
 <p align="center"><img src="images/duplicates.png" width="700" height="400" /></p>
 
-Challenge file:
+#### Challenge file:
 
 ```
 from Crypto.Util.number import getPrime
@@ -55,5 +55,18 @@ With d we can decrypt the plaintext.
 
 https://crypto.stackexchange.com/questions/39486/is-it-possible-to-have-multiple-rsa-private-keys
 
-<p align="center"><img src="images/duplicates2.png" width="350" height="100" /></p>
+<img src="images/duplicates2.png" width="350" height="100" />
 
+- Upon understanding we get to know the formula e^-1 mod(lcm(p-1)*(q-1))
+- This is to find the minimal decrypting exponent and we can call this as d2
+- Hence we satisfied d2 != d1 and we can now decrpty the plaintext.
+
+```
+d2 = inverse(e,gmpy2.lcm(p-1,q-1))
+```
+- Sending d2 to the instance we get the flag 
+ "Good Job!!
+  inctf{Seems_l1k3_LCM_1s_n0t_Us3less} "
+  
+ #### Flag:
+  inctf{Seems_l1k3_LCM_1s_n0t_Us3less}
