@@ -1,6 +1,6 @@
 ## Challenge Name : Duplicates
 
-<p align="center"><img src="images/duplicates.png" width="400" height="400" /></p>
+<p align="center"><img src="images/duplicates.png" width="700" height="400" /></p>
 
 challenge file:
 
