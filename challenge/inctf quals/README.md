@@ -55,5 +55,5 @@ With d we can decrypt the plaintext.
 
 https://crypto.stackexchange.com/questions/39486/is-it-possible-to-have-multiple-rsa-private-keys
 
-<p align="center"><img src="images/duplicates2.png" width="500" height="400" /></p>
+<img src="images/duplicates2.png" width="300" height="300" />
 
