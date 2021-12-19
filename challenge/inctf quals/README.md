@@ -53,9 +53,9 @@ With d we can decrypt the plaintext.
 - Our soultion lies on finding d2 which does not match with d1 but still able to decrypt the plaintext when passing in the equation pow(ct,d2,n).
 - Upon googling able to find the below converstation on multiple rsa private keys(d).
 
-https://crypto.stackexchange.com/questions/39486/is-it-possible-to-have-multiple-rsa-private-keys
+   https://crypto.stackexchange.com/questions/39486/is-it-possible-to-have-multiple-rsa-private-keys
 
-<img src="images/duplicates2.png" width="350" height="100" />
+   <img src="images/duplicates2.png" width="350" height="100" />
 
 - Upon understanding we get to know the formula e^-1 mod(lcm(p-1)*(q-1))
 - This is to find the minimal decrypting exponent and we can call this as d2
