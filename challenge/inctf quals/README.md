@@ -74,7 +74,7 @@ d2 = inverse(e,gmpy2.lcm(p-1,q-1))
 ## Challenge Name : common-extender
    
 Challenge file:
-  ````
+```
 from Crypto.Util.number import *
 from secret import *
 p=getPrime(1024)
@@ -157,7 +157,7 @@ print(solvable) #If gcd(e1,e2) = 1 , then we can recover plaintext
 g, s1, s2 = gmpy2.gcdext(e1, e2)
 
 #Doing extended euclidean to find the values s and t
-#using gmpy since the value of e is too large that we would get non divisible float error
+#using gmpy since the value of e is too large that we would get non divisible float error !
 assert e1 * s1 + e2 * s2 == 1
 #Only true while e1s1+e2s2 = 1
 
