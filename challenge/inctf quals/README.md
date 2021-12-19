@@ -29,13 +29,13 @@ if __name__ == '__main__':
         print("Are you for real??")
 ```
 
-- The challange runs on the remote instance where we have to give the value of d  to decrypt the flag
+- The challange runs on the remote instance where we have to give the value of d  to decrypt the flag.
 - We were given with values of p and q when running the instance.
 
 ```
 pq = [9271027477113701235755350545719977174599676462901577644714811380208294215204090221612185375557990680124488952535641704656501628556848766875472425673189497, 9138046549037796433974516840615141901475690892121490151554506619221318177641251570519278540381108700024825885518437955535114986879514659998608890291099949]
 ```
-- RSA simple caculations
+#### RSA simple caculations
 
 ```
 p = pq[0]
@@ -57,8 +57,8 @@ With d we can decrypt the plaintext.
 
    <img src="images/duplicates2.png" width="350" height="100" />
 
-- Upon understanding we get to know the formula e^-1 mod(lcm(p-1)*(q-1))
-- This is to find the minimal decrypting exponent and we can call this as d2
+- Upon understanding we get to know the formula e^-1 mod(lcm(p-1)*(q-1)).
+- This is to find the minimal decrypting exponent and we can call this as d2.
 - Hence we satisfied d2 != d1 and we can now decrpty the plaintext.
 
 ```
@@ -68,5 +68,5 @@ d2 = inverse(e,gmpy2.lcm(p-1,q-1))
  "Good Job!!
   inctf{Seems_l1k3_LCM_1s_n0t_Us3less} "
   
- #### Flag:
-  inctf{Seems_l1k3_LCM_1s_n0t_Us3less}
+  #### Flag:
+   inctf{Seems_l1k3_LCM_1s_n0t_Us3less}
