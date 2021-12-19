@@ -2,6 +2,8 @@
 
 challenge file:
 
+<img src="images/duplicates.png" width="400" height="300" />
+
 ```
 from Crypto.Util.number import getPrime
 from secret import flag
