@@ -2,7 +2,7 @@
 
 challenge file:
 
-   <img src="images/duplicates.png" width="300" height="300" />
+<p align="center"><img src="images/duplicates.png" width="300" height="300" /></p>
 
 ```
 from Crypto.Util.number import getPrime
