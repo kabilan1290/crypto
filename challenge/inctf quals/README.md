@@ -2,7 +2,7 @@
 
 <p align="center"><img src="images/duplicates.png" width="700" height="400" /></p>
 
-challenge file:
+Challenge file:
 
 ```
 from Crypto.Util.number import getPrime
@@ -54,3 +54,6 @@ With d we can decrypt the plaintext.
 - Upon googling able to find the below converstation on multiple rsa private keys(d).
 
 https://crypto.stackexchange.com/questions/39486/is-it-possible-to-have-multiple-rsa-private-keys
+
+<p align="center"><img src="images/duplicates2.png" width="500" height="400" /></p>
+
