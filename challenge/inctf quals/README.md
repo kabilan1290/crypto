@@ -1,8 +1,8 @@
 ## Challenge Name : Duplicates
 
-challenge file:
+<p align="center"><img src="images/duplicates.png" width="400" height="400" /></p>
 
-<p align="center"><img src="images/duplicates.png" width="300" height="300" /></p>
+challenge file:
 
 ```
 from Crypto.Util.number import getPrime
