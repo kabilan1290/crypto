@@ -179,3 +179,5 @@ print(long_to_bytes(final))
 
 #Flag : inctf{common_modulus_uses_extended_gcd}
 ```
+### Flag:
+inctf{common_modulus_uses_extended_gcd}
