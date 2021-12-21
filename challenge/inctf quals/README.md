@@ -241,10 +241,10 @@ if __name__=='__main__':
   ```      
    - So its a stream cipher where each bit of data would be encrypted one at a time.
    - This challenge runs on a remote instance and we are given the challenge file.
-    - As a gift we will get the `IV` and `cipher text` which is encrypted using OFB mode with a randomkey of 16 `key=urandom(16)`
-    - We have an option to encrypt three strings - "You can encrypt any string you want 3 times."
-    - The program takes first 16 as IV and above will be taken as message and will be encrypted and given to us.
-    - Since this is a stream cipher that performing XOR operation, we can simply send the gift given to us `IV+Cipher` to get the plaintext.
+   - As a gift we will get the `IV` and `cipher text` which is encrypted using OFB mode with a randomkey of 16 `key=urandom(16)`
+   - We have an option to encrypt three strings - "You can encrypt any string you want 3 times."
+   - The program takes first 16 as IV and above will be taken as message and will be encrypted and given to us.
+   - Since this is a stream cipher that performing XOR operation, we can simply send the gift given to us `IV+Cipher` to get the plaintext.
        
     
     python3 chall.py 
