@@ -203,7 +203,7 @@ Why always block try stream !!
 FLAG FORMAT:
 inctf{...}
 
-Challenge file:
+### Challenge file:
 ```
 #!/usr/sbin/python
 from secret import flag
@@ -229,14 +229,81 @@ def main():
 
 if __name__=='__main__':
     main()
-    ```
-    - This challenge is based on output feedback(OFB).
-    ```
+  ```
+  - This challenge is based on output feedback(OFB).
+  
+  ```
     The output feedback (OFB) mode makes a block cipher into a synchronous stream cipher. It generates keystream blocks, which are then XORed with the plaintext blocks to get the ciphertext. Just as with other stream         ciphers, flipping a bit in the ciphertext produces a flipped bit in the plaintext at the same location. 
-     ```      
-     - So its a stream cipher where each bit of data would be encrypted one at a time.
-     - This challenge runs on a remote instance and we are given the challenge file.
-     - As a gift we will get the `IV` and `cipher text` which is encrypted using OFB mode with a randomkey of 16 `key=urandom(16)`!
-     - We have an option to encrypt three strings - "You can encrypt any string you want 3 times."
-     - The program takes first 16 as IV and above will be taken as message and will be encrypted and given to us.
-     - Since this is a stream cipher that performing XOR operation, we can simply send the gift given to us `IV+Cipher` to get the plaintext.
+  ```      
+   - So its a stream cipher where each bit of data would be encrypted one at a time.
+   - This challenge runs on a remote instance and we are given the challenge file.
+    - As a gift we will get the `IV` and `cipher text` which is encrypted using OFB mode with a randomkey of 16 `key=urandom(16)`!
+    - We have an option to encrypt three strings - "You can encrypt any string you want 3 times."
+    - The program takes first 16 as IV and above will be taken as message and will be encrypted and given to us.
+    - Since this is a stream cipher that performing XOR operation, we can simply send the gift given to us `IV+Cipher` to get the plaintext.
+   
+     ```
+    python3 chall.py 
+    Welcome to inctf.
+    Here is a gift from my side:
+    c9b1f2b695b6811a7a55e87c502adaae0a939c6bba4062ce1348c23522af02e93688638b6f328805d274212224d3399d3d8008ea
+    You can encrypt any string you want 3 times.
+    > c9b1f2b695b6811a7a55e87c502adaae0a939c6bba4062ce1348c23522af02e93688638b6f328805d274212224d3399d3d8008ea 
+    7472795f686172646572
+    
+    >>> "7472795f686172646572".decode("hex")
+    'try_harder'
+        ```
+- Decrypting the resulted hex == try_harder; This is due to the condition `return ct if ct not in flag else b"try_harder"`
+- Hence we have to sent a plaintext `p2` along with the `IV` where the server will give us the ciphertext `c2` 
+- XORing the `p2 ⊕ c2` will give us the key `k`.
+- Now we can use the key to xor the ciphertext `c1`.
+- `key ⊕ c1` will result in plaintext `p1` which is our flag.
+- We were able to derive this because same `IV` and `KEY` is used to generate the cipher text from user given input.
+- Thus we got the flag.
+
+ ```
+python3 challenge.py 
+Welcome to inctf.
+Here is a gift from my side:
+4027e18866d061df476428fc88a4bdb631cf6e16da3391039d5debcb5fa61e6b22555eeefe19f4367aff963fe7e2be501f6ffaa3
+You can encrypt any string you want 3 times.
+>>
+
+iv_cipher_pair = "4027e18866d061df476428fc88a4bdb631cf6e16da3391039d5debcb5fa61e6b22555eeefe19f4367aff963fe7e2be501f6ffaa3"
+>>> iv = iv_cipher_pair[:32]
+>>> iv
+'4027e18866d061df476428fc88a4bdb6'
+>>> c1 = iv_cipher_pair[32:]
+>>> c1
+'31cf6e16da3391039d5debcb5fa61e6b22555eeefe19f4367aff963fe7e2be501f6ffaa3'
+>>> len(c1.decode("hex"))
+36
+
+>>> ("a"*36).encode("hex")
+'616161616161616161616161616161616161616161616161616161616161616161616161'
+>>> p2 = ("a"*36).encode("hex")  
+#we are creating a dummy text with the same length.
+
+>>> iv+p2
+'4027e18866d061df476428fc88a4bdb6616161616161616161616161616161616161616161616161616161616161616161616161'
+ # we will suuply this in the instance to get c2.
+
+python3 chall.py 
+Welcome to inctf.
+Here is a gift from my side:
+4027e18866d061df476428fc88a4bdb631cf6e16da3391039d5debcb5fa61e6b22555eeefe19f4367aff963fe7e2be501f6ffaa3
+You can encrypt any string you want 3 times.
+> 4027e18866d061df476428fc88a4bdb6616161616161616161616161616161616161616161616161616161616161616161616161
+39c06c03dd29c51b9151b9de4cf61c55005d4fe7ac0aa0082fecc401b5b7ea485f2fbabf
+
+#We get the c2 = 39c06c03dd29c51b9151b9de4cf61c55005d4fe7ac0aa0082fecc401b5b7ea485f2fbabf
+
+>>> key =pwn.xor(c2.decode("hex"),p2.decode("hex"))
+
+>>> pwn.xor(key,c1.decode("hex"))
+'inctf{5ymm3tr1c_Ciph3r5_4r3_345y!!!}'
+```
+ ### Flag:
+inctf{5ymm3tr1c_Ciph3r5_4r3_345y!!!}
+
