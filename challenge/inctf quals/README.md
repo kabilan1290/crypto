@@ -195,6 +195,8 @@ print(long_to_bytes(final))
 ### Flag:
 inctf{common_modulus_uses_extended_gcd}
 
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 ## Challenge Name : OFB-Madness
 
 DESCRIPTION
@@ -264,13 +266,15 @@ if __name__=='__main__':
 - Thus we got the flag.
 
  ```
+Console 1:
 python3 challenge.py 
 Welcome to inctf.
 Here is a gift from my side:
 4027e18866d061df476428fc88a4bdb631cf6e16da3391039d5debcb5fa61e6b22555eeefe19f4367aff963fe7e2be501f6ffaa3
 You can encrypt any string you want 3 times.
->>
+>
 
+Console 2:
 iv_cipher_pair = "4027e18866d061df476428fc88a4bdb631cf6e16da3391039d5debcb5fa61e6b22555eeefe19f4367aff963fe7e2be501f6ffaa3"
 >>> iv = iv_cipher_pair[:32]
 >>> iv
@@ -290,6 +294,7 @@ iv_cipher_pair = "4027e18866d061df476428fc88a4bdb631cf6e16da3391039d5debcb5fa61e
 '4027e18866d061df476428fc88a4bdb6616161616161616161616161616161616161616161616161616161616161616161616161'
  # we will suuply this in the instance to get c2.
 
+Console 1:
 python3 chall.py 
 Welcome to inctf.
 Here is a gift from my side:
@@ -300,6 +305,7 @@ You can encrypt any string you want 3 times.
 
 #We get the c2 = 39c06c03dd29c51b9151b9de4cf61c55005d4fe7ac0aa0082fecc401b5b7ea485f2fbabf
 
+console 2:
 >>> key =pwn.xor(c2.decode("hex"),p2.decode("hex"))
 
 >>> pwn.xor(key,c1.decode("hex"))
