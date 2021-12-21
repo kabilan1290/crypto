@@ -53,7 +53,7 @@ With d we can decrypt the plaintext.
 ```
 - But the twist here is gen() already generated d with the same formula  `d1=pow(e,-1,(p-1)*(q-1))`
 - The user given input is taken as `d2` and if `d1 == d2`,we will be exit from the instance saying "Are you for real??"
-- If we give some other values for `d` ,we will get exit from the instance saying "bruh".
+- If we give some other values for `d` ,the program will try to decrypt the plaintext with the given `d` if not we will get exit from the instance saying "bruh".
 - Our soultion lies on finding `d2` which does not match with d1 but still able to decrypt the plaintext when passing in the equation pow(ct,d2,n).
 - Upon googling able to find the below converstation on multiple rsa private keys(d).
 
@@ -74,6 +74,8 @@ d2 = inverse(e,gmpy2.lcm(p-1,q-1))
   
   #### Flag:
    inctf{Seems_l1k3_LCM_1s_n0t_Us3less}
+   
+   `We can also use d+phi for this challenge` 
    
 ## Challenge Name : common-extender
 
