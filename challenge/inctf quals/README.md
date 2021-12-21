@@ -75,7 +75,7 @@ d2 = inverse(e,gmpy2.lcm(p-1,q-1))
   #### Flag:
    inctf{Seems_l1k3_LCM_1s_n0t_Us3less}
    
-   `We can also use d+phi,d^2*e  for this challenge(got it from post challenge discuission)` 
+   `We can also use d+phi,d^2*e  for this challenge(got it from post challenge discussion)` 
  
  ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
  
@@ -294,7 +294,7 @@ iv_cipher_pair = "4027e18866d061df476428fc88a4bdb631cf6e16da3391039d5debcb5fa61e
 
 >>> iv+p2
 '4027e18866d061df476428fc88a4bdb6616161616161616161616161616161616161616161616161616161616161616161616161'
- # we will suuply this in the instance to get c2.
+ # we will supply this in the instance to get c2.
 
 Console 1:
 python3 chall.py 
