@@ -253,6 +253,7 @@ if __name__=='__main__':
     
     >>> "7472795f686172646572".decode("hex")
     'try_harder'
+    
         ```
 - Decrypting the resulted hex == try_harder; This is due to the condition `return ct if ct not in flag else b"try_harder"`
 - Hence we have to sent a plaintext `p2` along with the `IV` where the server will give us the ciphertext `c2` 
