@@ -75,7 +75,7 @@ d2 = inverse(e,gmpy2.lcm(p-1,q-1))
   #### Flag:
    inctf{Seems_l1k3_LCM_1s_n0t_Us3less}
    
-   `We can also use d+phi for this challenge` 
+   `We can also use d+phi,d^2*e  for this challenge(got it from post challenge discuission)` 
    
 ## Challenge Name : common-extender
 
@@ -194,3 +194,49 @@ print(long_to_bytes(final))
 ```
 ### Flag:
 inctf{common_modulus_uses_extended_gcd}
+
+## Challenge Name : OFB-Madness
+
+DESCRIPTION
+Why always block try stream !!
+
+FLAG FORMAT:
+inctf{...}
+
+Challenge file:
+```
+#!/usr/sbin/python
+from secret import flag
+from Crypto.Cipher import AES
+from os import urandom
+
+key=urandom(16)
+
+def encrypt(msg, iv):
+    cipher = AES.new(key, AES.MODE_OFB,iv)
+    ct = cipher.encrypt(msg)
+    return ct if ct not in flag else b"try_harder"
+
+def main():
+    print('Welcome to inctf.\nHere is a gift from my side:')
+    iv=urandom(16)
+    print(iv.hex()+encrypt(flag,iv).hex())
+    print("You can encrypt any string you want 3 times.")
+    for _ in range(3):
+        x=bytes.fromhex(input("> ").strip())
+        iv,msg=x[:16],x[16:]
+        print(encrypt(msg,iv).hex())
+
+if __name__=='__main__':
+    main()
+    ```
+    - This challenge is based on output feedback(OFB).
+    ```
+    The output feedback (OFB) mode makes a block cipher into a synchronous stream cipher. It generates keystream blocks, which are then XORed with the plaintext blocks to get the ciphertext. Just as with other stream         ciphers, flipping a bit in the ciphertext produces a flipped bit in the plaintext at the same location. 
+     ```      
+     - So its a stream cipher where each bit of data would be encrypted one at a time.
+     - This challenge runs on a remote instance and we are given the challenge file.
+     - As a gift we will get the `IV` and `cipher text` which is encrypted using OFB mode with a randomkey of 16 `key=urandom(16)`!
+     - We have an option to encrypt three strings - "You can encrypt any string you want 3 times."
+     - The program takes first 16 as IV and above will be taken as message and will be encrypted and given to us.
+     - Since this is a stream cipher that performing XOR operation, we can simply send the gift given to us `IV+Cipher` to get the plaintext.
