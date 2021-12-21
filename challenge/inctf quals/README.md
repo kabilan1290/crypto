@@ -241,12 +241,8 @@ if __name__=='__main__':
     - We have an option to encrypt three strings - "You can encrypt any string you want 3 times."
     - The program takes first 16 as IV and above will be taken as message and will be encrypted and given to us.
     - Since this is a stream cipher that performing XOR operation, we can simply send the gift given to us `IV+Cipher` to get the plaintext.
+       
     
-    
-    
-    
-    
-    ```
     python3 chall.py 
     Welcome to inctf.
     Here is a gift from my side:
@@ -258,7 +254,7 @@ if __name__=='__main__':
     >>> "7472795f686172646572".decode("hex")
     'try_harder'
     
-        ```
+        
 - Decrypting the resulted hex == try_harder; This is due to the condition `return ct if ct not in flag else b"try_harder"`
 - Hence we have to sent a plaintext `p2` along with the `IV` where the server will give us the ciphertext `c2` 
 - XORing the `p2 ⊕ c2` will give us the key `k`.
