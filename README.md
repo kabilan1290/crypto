@@ -14,3 +14,4 @@ Factoring - http://factordb.com/
 
 `>>> from sympy import *`
 `>>> factorint(value)`
+- Use the above module for factoring!
