@@ -9,3 +9,8 @@ Euclidean Alogrithm - https://www.freecodecamp.org/news/euclidian-gcd-algorithm-
 The Extended Euclidean Algorithm - http://www-math.ucdenver.edu/~wcherowi/courses/m5410/exeucalg.html
 
 Phi Exploration - https://www.khanacademy.org/computing/computer-science/cryptography/modern-crypt/pi/euler-totient-exploration
+
+Factoring - http://factordb.com/
+
+`>>> from sympy import *
+>>> factorint(value)`
