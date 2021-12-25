@@ -12,5 +12,5 @@ Phi Exploration - https://www.khanacademy.org/computing/computer-science/cryptog
 
 Factoring - http://factordb.com/
 
-`>>> from sympy import *
->>> factorint(value)`
+`>>> from sympy import *`
+`>>> factorint(value)`
