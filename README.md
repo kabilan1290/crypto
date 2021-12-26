@@ -17,3 +17,25 @@ Factoring - http://factordb.com/
 - Use the above module for factoring!
 
 Read - https://github.com/ashutosh1206/Crypton
+
+Notes:
+
+part1: Key Generation
+
+Select  p,q                 p and q are prime numbers; p!=q
+Calculate n               n = p * q
+Calculate phi(ϕ)       ϕ = ( p - 1 ) * ( q - 1 )
+Select integer e       GCD ( ϕ(n) , e ) = 1; 1 < e < ϕ(n)
+Calculate d               d = inverse(e) % ϕ(n)
+Public Key (Pk)         {e,n}
+Private Key (Pr)        {d,n}
+
+Part2: Encryption       
+
+Plain Text (M)           M < n
+Cipher Text (C)         C = pow( M , e) % n
+
+Part3: Decryption
+
+Cipher Text (C)          C
+Plain Text (M)            M = pow(C , d) % n
