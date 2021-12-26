@@ -15,3 +15,5 @@ Factoring - http://factordb.com/
 `>>> from sympy import *`
 `>>> factorint(value)`
 - Use the above module for factoring!
+
+Read - https://github.com/ashutosh1206/Crypton
