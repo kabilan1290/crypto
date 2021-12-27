@@ -16,6 +16,8 @@ Factoring - http://factordb.com/
 `>>> factorint(value)`
 - Use the above module for factoring!
 
+https://github.com/ryosan-470/factordb-python
+
 Read - https://github.com/ashutosh1206/Crypton
 
 Notes:
