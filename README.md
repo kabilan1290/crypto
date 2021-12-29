@@ -10,7 +10,7 @@ The Extended Euclidean Algorithm - http://www-math.ucdenver.edu/~wcherowi/course
 
 Phi Exploration - https://www.khanacademy.org/computing/computer-science/cryptography/modern-crypt/pi/euler-totient-exploration
 
-Factoring - http://factordb.com/
+Factoring - http://factordb.com/ , https://www.alpertron.com.ar/ECM.HTM
 
 `>>> from sympy import *`
 `>>> factorint(value)`
