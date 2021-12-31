@@ -133,9 +133,8 @@ mpz(1)
 - We can use extended euclidean to find `s1` and `s2` and by doing so we had `s1` as negative integer and `s2` as positive integer.
 - Then need to inverse `c1` since `s1` is negative.
 ```
-m1 = pow(c1inversed,s1,N)
+m1 = pow(c1inversed,-s1,N)
 
-# 1/c1 ** s1 % N
 m2 = pow(c2,s2,N)
 # c2 ** s1 % N
 flag = (m1 *m2)%N
