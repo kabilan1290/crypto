@@ -181,7 +181,7 @@ assert e1 * s1 + e2 * s2 == 1
 c1inversed = gmpy2.invert(c1, N)
 
 #inversing c1 since s1 is negative
-m1 = pow(c1inversed,s1,N)
+m1 = pow(c1inversed,-s1,N)
 
 # 1/c1 ** s1 % N
 m2 = pow(c2,s2,N)
