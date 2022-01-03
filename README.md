@@ -22,7 +22,7 @@ Read - https://github.com/ashutosh1206/Crypton
 
 Notes:
 
-part1: Key Generation
+### part1: Key Generation
 
 Select  p,q                 p and q are prime numbers; p!=q
 
@@ -39,7 +39,7 @@ Public Key (Pk)         {e,n}
 Private Key (Pr)        {d,n}
 
 
-Part2: Encryption       
+### Part2: Encryption       
 
 Plain Text (M)           M < n
 
