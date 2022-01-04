@@ -1,4 +1,4 @@
-# crypto
+# Cryptography
 
 Read - https://cryptohack.gitbook.io/cryptobook/fundamentals/
 
