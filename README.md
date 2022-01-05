@@ -20,6 +20,8 @@ https://github.com/ryosan-470/factordb-python
 
 Read - https://github.com/ashutosh1206/Crypton
 
+Read - https://ctf-wiki.org/crypto/asymmetric/rsa/rsa_theory/
+
 Notes:
 
 ### part1: Key Generation
