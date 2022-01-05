@@ -45,7 +45,7 @@ Plain Text (M)           M < n
 
 Cipher Text (C)         C = pow( M , e) % n
 
-Part3: Decryption
+### Part3: Decryption
 
 Cipher Text (C)          C
 
