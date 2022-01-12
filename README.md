@@ -52,3 +52,10 @@ Cipher Text (C)         C = pow( M , e) % n
 Cipher Text (C)          C
 
 Plain Text (M)            M = pow(C , d) % n
+
+### Sage commands:
+
+>>>from sage.rings.finite_rings.integer_mod import square_root_mod_prime
+>>>print(square_root_mod_prime(Mod(a,p),p))   = r^2
+`r^2 = a mod p`
+- To find mod square root
