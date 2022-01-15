@@ -22,6 +22,8 @@ Read - https://github.com/ashutosh1206/Crypton
 
 Read - https://ctf-wiki.org/crypto/asymmetric/rsa/rsa_theory/
 
+Read - https://cryptobook.nakov.com/digital-signatures/rsa-signatures
+
 Notes:
 
 ### part1: Key Generation
