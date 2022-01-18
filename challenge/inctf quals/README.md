@@ -53,7 +53,7 @@ With d we can decrypt the plaintext.
 ```
 - But the twist here is gen() already generated d with the same formula  `d1=pow(e,-1,(p-1)*(q-1))`
 - The user given input is taken as `d2` and if `d1 == d2`,we will be exit from the instance saying "Are you for real??"
-- If we give some other values for `d` ,we will get exit from the instance saying "bruh".
+- If we give some other values for `d` ,the program will try to decrypt the plaintext with the given `d` if not we will get exit from the instance saying "bruh".
 - Our soultion lies on finding `d2` which does not match with d1 but still able to decrypt the plaintext when passing in the equation pow(ct,d2,n).
 - Upon googling able to find the below converstation on multiple rsa private keys(d).
 
@@ -75,6 +75,10 @@ d2 = inverse(e,gmpy2.lcm(p-1,q-1))
   #### Flag:
    inctf{Seems_l1k3_LCM_1s_n0t_Us3less}
    
+   `We can also use d+phi,d^2*e  for this challenge(got it from post challenge discussion)` 
+ 
+ ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ 
 ## Challenge Name : common-extender
 
 DESCRIPTION
@@ -129,9 +133,8 @@ mpz(1)
 - We can use extended euclidean to find `s1` and `s2` and by doing so we had `s1` as negative integer and `s2` as positive integer.
 - Then need to inverse `c1` since `s1` is negative.
 ```
-m1 = pow(c1inversed,s1,N)
+m1 = pow(c1inversed,-s1,N)
 
-# 1/c1 ** s1 % N
 m2 = pow(c2,s2,N)
 # c2 ** s1 % N
 flag = (m1 *m2)%N
@@ -178,7 +181,7 @@ assert e1 * s1 + e2 * s2 == 1
 c1inversed = gmpy2.invert(c1, N)
 
 #inversing c1 since s1 is negative
-m1 = pow(c1inversed,s1,N)
+m1 = pow(c1inversed,-s1,N)
 
 # 1/c1 ** s1 % N
 m2 = pow(c2,s2,N)
@@ -192,3 +195,185 @@ print(long_to_bytes(final))
 ```
 ### Flag:
 inctf{common_modulus_uses_extended_gcd}
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+## Challenge Name : OFB-Madness
+
+DESCRIPTION
+Why always block try stream !!
+
+FLAG FORMAT:
+inctf{...}
+
+### Challenge file:
+```
+#!/usr/sbin/python
+from secret import flag
+from Crypto.Cipher import AES
+from os import urandom
+
+key=urandom(16)
+
+def encrypt(msg, iv):
+    cipher = AES.new(key, AES.MODE_OFB,iv)
+    ct = cipher.encrypt(msg)
+    return ct if ct not in flag else b"try_harder"
+
+def main():
+    print('Welcome to inctf.\nHere is a gift from my side:')
+    iv=urandom(16)
+    print(iv.hex()+encrypt(flag,iv).hex())
+    print("You can encrypt any string you want 3 times.")
+    for _ in range(3):
+        x=bytes.fromhex(input("> ").strip())
+        iv,msg=x[:16],x[16:]
+        print(encrypt(msg,iv).hex())
+
+if __name__=='__main__':
+    main()
+  ```
+  - This challenge is based on output feedback(OFB).
+  
+  ```
+    The output feedback (OFB) mode makes a block cipher into a synchronous stream cipher. It generates keystream blocks, which are then XORed with the plaintext blocks to get the ciphertext. Just as with other stream         ciphers, flipping a bit in the ciphertext produces a flipped bit in the plaintext at the same location. 
+  ```      
+   - So its a stream cipher where each bit of data would be encrypted one at a time.
+   - This challenge runs on a remote instance and we are given the challenge file.
+   - As a gift we will get the `IV` and `cipher text` which is encrypted using OFB mode with a randomkey of 16 `key=urandom(16)`
+   - We have an option to encrypt three strings - "You can encrypt any string you want 3 times."
+   - The program takes first 16 as IV and above will be taken as message and will be encrypted and given to us.
+   - Since this is a stream cipher that performing XOR operation, we can simply send the gift given to us `IV+Cipher` to get the plaintext.
+       
+    
+    python3 chall.py 
+    Welcome to inctf.
+    Here is a gift from my side:
+    c9b1f2b695b6811a7a55e87c502adaae0a939c6bba4062ce1348c23522af02e93688638b6f328805d274212224d3399d3d8008ea
+    You can encrypt any string you want 3 times.
+    > c9b1f2b695b6811a7a55e87c502adaae0a939c6bba4062ce1348c23522af02e93688638b6f328805d274212224d3399d3d8008ea 
+    7472795f686172646572
+    
+    >>> "7472795f686172646572".decode("hex")
+    'try_harder'
+    
+        
+- Decrypting the resulted hex == try_harder; This is due to the condition `return ct if ct not in flag else b"try_harder"`
+- Hence we have to sent a plaintext `p2` along with the `IV` where the server will give us the ciphertext `c2` 
+- XORing the `p2 ⊕ c2` will give us the key `k`.
+- Now we can use the key to xor the ciphertext `c1`.
+- `key ⊕ c1` will result in plaintext `p1` which is our flag.
+- We were able to derive this because same `IV` and `KEY` is used to generate the cipher text from user given input.
+- Thus we got the flag.
+
+ ```
+Console 1:
+python3 challenge.py 
+Welcome to inctf.
+Here is a gift from my side:
+4027e18866d061df476428fc88a4bdb631cf6e16da3391039d5debcb5fa61e6b22555eeefe19f4367aff963fe7e2be501f6ffaa3
+You can encrypt any string you want 3 times.
+>
+
+Console 2:
+iv_cipher_pair = "4027e18866d061df476428fc88a4bdb631cf6e16da3391039d5debcb5fa61e6b22555eeefe19f4367aff963fe7e2be501f6ffaa3"
+>>> iv = iv_cipher_pair[:32]
+>>> iv
+'4027e18866d061df476428fc88a4bdb6'
+>>> c1 = iv_cipher_pair[32:]
+>>> c1
+'31cf6e16da3391039d5debcb5fa61e6b22555eeefe19f4367aff963fe7e2be501f6ffaa3'
+>>> len(c1.decode("hex"))
+36
+
+>>> ("a"*36).encode("hex")
+'616161616161616161616161616161616161616161616161616161616161616161616161'
+>>> p2 = ("a"*36).encode("hex")  
+#we are creating a dummy text with the same length.
+
+>>> iv+p2
+'4027e18866d061df476428fc88a4bdb6616161616161616161616161616161616161616161616161616161616161616161616161'
+ # we will supply this in the instance to get c2.
+
+Console 1:
+python3 chall.py 
+Welcome to inctf.
+Here is a gift from my side:
+4027e18866d061df476428fc88a4bdb631cf6e16da3391039d5debcb5fa61e6b22555eeefe19f4367aff963fe7e2be501f6ffaa3
+You can encrypt any string you want 3 times.
+> 4027e18866d061df476428fc88a4bdb6616161616161616161616161616161616161616161616161616161616161616161616161
+39c06c03dd29c51b9151b9de4cf61c55005d4fe7ac0aa0082fecc401b5b7ea485f2fbabf
+
+#We get the c2 = 39c06c03dd29c51b9151b9de4cf61c55005d4fe7ac0aa0082fecc401b5b7ea485f2fbabf
+
+console 2:
+>>> key =pwn.xor(c2.decode("hex"),p2.decode("hex"))
+
+>>> pwn.xor(key,c1.decode("hex"))
+'inctf{5ymm3tr1c_Ciph3r5_4r3_345y!!!}'
+```
+ ### Flag:
+inctf{5ymm3tr1c_Ciph3r5_4r3_345y!!!}
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+## Challenge Name : HakUnA MaTaTa
+
+DESCRIPTION
+My friend said that no one can find his message. Is it so? Help me to retrieve that message.
+
+FLAG FORMAT:
+inctf{...}
+
+Challenge file:
+  ```
+n= 176761571208207012415104998714596408301750400405256242985416759062950343063581762981549330162494657679457228005027706486975181662262022630561794614317969075124125317405890618375349258122857970874783283331306015606502527083552449658631772271993457846851450158171082817214843608062810655788283192168155075475033
+
+publickey_factors=[13,4410317,3503090458121,1787448132402352730231919365956562215780010188225948494099055254148746819284760979919032994965974299927086267543424246654464054743220910777053514594577772477081375429741060310438880197018372947090569183433805681685094237700877854589478992875314150034441676675035103332579789642879492251]
+
+c= 64705229719616953499618671343545641623043176468818932627792545485250020716349796561576551079269927746253595018629167137753299865685555409247164742357601590413993926183392568247214089883027699319306718399837516788223830037840626900525450740884857152047880456955305220457169101462244557867578665264644074661128
+   ```
+
+- In this challenge,we were given the values of n,c and public factors.
+- Lets call e as `public_factor[0]*public_factor[1]*public_factor[2]*public_factor[3]*
+
+```
+e = 359002901875970139076045046717651549452954681532953131887611720341506323980003580617030258305188213225370842592897486301069588694087320875878929506745873473678037911918024974427562399328526961354474868444415308725365460831112957851467250624232407603264335161610831645366607339269357820867324693467552878891L
+```
+- By seeing the `e` value and check out the attacks possible when `e` being larger,we found about weiner's attack https://en.wikipedia.org/wiki/Wiener%27s_attack
+- https://github.com/orisano/owiener
+- I used the above repository for finding the value of  `d`.
+
+```
+import owiener
+>>>n = 176761571208207012415104998714596408301750400405256242985416759062950343063581762981549330162494657679457228005027706486975181662262022630561794614317969075124125317405890618375349258122857970874783283331306015606502527083552449658631772271993457846851450158171082817214843608062810655788283192168155075475033
+>>>e = 359002901875970139076045046717651549452954681532953131887611720341506323980003580617030258305188213225370842592897486301069588694087320875878929506745873473678037911918024974427562399328526961354474868444415308725365460831112957851467250624232407603264335161610831645366607339269357820867324693467552878891
+
+>>> owiener.attack(e,n)
+982008728934483402306138881747757823898613335584756905474537550349724128131
+
+#We got the vlaue of d
+```
+ ```
+Solution.py
+
+from Crypto.Util.number import *
+
+n= 176761571208207012415104998714596408301750400405256242985416759062950343063581762981549330162494657679457228005027706486975181662262022630561794614317969075124125317405890618375349258122857970874783283331306015606502527083552449658631772271993457846851450158171082817214843608062810655788283192168155075475033
+
+c= 64705229719616953499618671343545641623043176468818932627792545485250020716349796561576551079269927746253595018629167137753299865685555409247164742357601590413993926183392568247214089883027699319306718399837516788223830037840626900525450740884857152047880456955305220457169101462244557867578665264644074661128
+
+
+d = 982008728934483402306138881747757823898613335584756905474537550349724128131
+
+ct = pow(c,d,n)
+
+print(long_to_bytes(ct))
+
+>>>b'inctf{w7ap_tHe_Tr@p_trAp_tHe_Wrap}'
+```
+#### Flag:
+
+inctf{w7ap_tHe_Tr@p_trAp_tHe_Wrap}
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
