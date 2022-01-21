@@ -1,10 +1,16 @@
 <img src ="RSA2.png"></img>
-- In this challenge we were given with two file flag.enc and private.pem.
+- In this Challenge we were given with two file flag.enc and private.pem.
+
 - Challenge Description says `Our security agency has got hold of a ciphertext and a key. Well..the key got corrupted and the lost character is represented by a x. Can you decipher the message for us?`
+
 - Viewing the private.pem file,we can notice a emoji is replaced in the place of a letter,which would make the private key invalid.
+
 <img src="rsa1.png"></img>
+
 - We can brutefoce all possible lowercase+uppercase alphabets and for each iteration decrypt the flag.enc.
+
 - Print the flag if we got a hit on the string which matches `KCTF`
+
 - Below is the Exploit script.
 
 ```
