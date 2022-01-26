@@ -24,6 +24,8 @@ Read - https://ctf-wiki.org/crypto/asymmetric/rsa/rsa_theory/
 
 Read - https://cryptobook.nakov.com/digital-signatures/rsa-signatures
 
+Read - http://secgroup.dais.unive.it/wp-content/uploads/2012/11/Practical-Padding-Oracle-Attacks-on-RSA.html
+
 Notes:
 
 ### part1: Key Generation
