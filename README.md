@@ -67,8 +67,14 @@ print(square_root_mod_prime(Mod(a,p),p))   = r^2
 - To find mod square root
 
 ### Formula
-- Cnsider single prime!
+- Consider single prime!
 
 `phi(p^k) = (p-1)*(p^k-1)`
 
 `phi(p^3) = (p-1)*(p^2)`
+
+- Finding phi from e,n,d
+`k=(e*d-1)//n`
+
+`phi=(e*d-1)//(k+1)`
+
