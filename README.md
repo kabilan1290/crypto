@@ -77,5 +77,10 @@ print(square_root_mod_prime(Mod(a,p),p))   = r^2
 
 `k=(e*d-1)//n`
 
+
+- Writeups
+
+`https://mokpo.tistory.com/813`
+
 `phi=(e*d-1)//(k+1)`
 
